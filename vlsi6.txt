@@ -1,8 +1,25 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+entity exp6 is
+    Port ( clk : in  STD_LOGIC;
+           rst : in  STD_LOGIC;
+           count : inout  STD_LOGIC_VECTOR (2 downto 0));
+end exp6;
+
+architecture Behavioral of exp6 is
+
+begin
 process(clk,rst)
 begin
-if (rst='1')then 
+if(rst='1') then 
 count <= "000";
 elsif(rising_edge(clk))then
 count <= count+1;
 end if;
 end process;
+
+end Behavioral;
