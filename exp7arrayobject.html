@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Array Objects</title>
+</head>
+<body>
+    <h1>Array Objects</h1>
+    <br>
+    <label for="fields">Enter the object fields separated by space: </label>
+    <input type="text" name="fields" id="fields"/>
+    <br><br>
+    <button type="submit" onclick="addArrayFields()">Submit</button>
+    <h4 style="color: red " id="arrFields">Array Object : ? </h4>
+    <br>
+  
+    <h2>Enter Values in Array Object</h2>
+    <br>
+    <label for="arrval">Enter the values sequentially in array object separated by space : </label>
+    <input type="text" name="arrval" id="arrval"/>
+    <br><br>
+    <button type="submit" onclick="addArrayValues()">Add</button>
+    <h4 style="color: red " id="arrObj">Array Object : ? </h4>
+    <br>
+
+    <h2>Check if Object is an Array</h2>
+    <br>
+    <button type="submit" onclick="checkArrayObject()">Check</button>
+    <h4 style="color: red " id="arrChk">Object? </h4>
+    <br>  
+
+    <script type="text/javascript">
+
+        var arrobj;
+        function addArrayFields(){
+            var af = document.getElementById('fields').value;
+            var arr = af.split(' ');
+            var x = '';
+            for(i=0; i<arr.length; i++){
+                x += arr[i] + " : " + " , ";
+            }
+            arrobj = [{x}];
+            let str = "";
+            for (let i in arrobj) {
+                str += Object.values(arrobj[i]) + " ";
+            };
+
+            document.getElementById('arrFields').innerHTML = "Array Object : " + str;
+        }
+   
+        function addArrayValues(){
+            var af = document.getElementById('fields').value;
+            var av = document.getElementById('arrval').value;
+            var arrf = af.split(' ');
+            var arrv = av.split(' ');
+            var x = '';
+            for(i=0; i<arrf.length; i++){
+                x += arrf[i] + " : " + arrv[i] + ", ";
+            }
+            var obj = {x};
+            arrobj.push(obj);
+            let str = "";
+            for (let i in arrobj) {
+                str += Object.values(arrobj[i]) + " ";
+            };
+            document.getElementById('arrObj').innerHTML = "Array Object : " + str;
+        }
+
+        function checkArrayObject(){
+
+            if(Array.isArray(arrobj)){
+                document.getElementById('arrChk').innerHTML = "Array Object : " + arrobj;
+            }
+            else{
+                document.getElementById('arrChk').innerHTML = "Given Object is not an Array";
+            }
+        }
+
+    </script>
+
+</body>
+</html>

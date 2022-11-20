@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Multiplication Table</title>
+</head>
+<body>
+    <h2>Table of Given Number</h2>
+    <label for="num">Enter the number : </label>
+    <input type="number" name="num" id="number"/>
+
+    <button type="submit" onclick="computeTable()">Generate Table</button>
+    <h4 style="color: red ">Table for number : <span id = "here">?</span></h4>
+    <br>
+    <h4 id="table" style="color: red "></h4>   
+
+    <script type="text/javascript">
+        function computeTable(){
+            var i = 0;
+            var tbl = [];
+            var n = parseInt(document.getElementById('number').value);
+            document.getElementById("here").innerHTML = n;
+            for(i = 1; i <= 10; i++){
+                //document.write(n + " x " + i + " = " + n*i + "<br>");  //working but on new page
+                var x = "<br>" + "     " + n + " x " + i + " = " + n*i ;
+                tbl[i-1] = x; 
+            }
+
+            <!-- document.getElementById("table").innerHTML = tbl; -->
+                
+        }
+
+    </script>
+     
+</body>
+</html>

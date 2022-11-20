@@ -1,0 +1,8 @@
+process(clk,rst)
+begin
+if (rst='1')then 
+count <= "000";
+elsif(rising_edge(clk))then
+count <= count+1;
+end if;
+end process;

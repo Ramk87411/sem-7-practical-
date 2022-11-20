@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>String Comparison</title>
+</head>
+<body>
+    <h1>String Comparison</h1>
+    <label for="str1">Enter the string 1: </label>
+    <input type="text" name="str1" id="str1"/>
+
+    <label for="str2">Enter the string 2: </label>
+    <input type="text" name="str2" id="str2"/>
+
+    <h2>String comparison using relational operators(=,>,<)</h2>
+    <button type="submit" onclick="compareOperators()">Compare Strings</button>
+    <h4 style="color: red " id="cmpopr">String Comparison : ? </h4>
+    <br>
+
+    <h2>String comparison using strict equality operator (===)</h2>
+    <button type="submit" onclick="strictEqualityOperator()">Compare String</button>
+    <h4 style="color: red " id="cmpeqopr">String Comparison : ? </h4>
+    <br>
+   
+    <h2>String comparison using match() method</h2>
+    <button type="submit" onclick="compareUsingMatch()">Compare String</button>
+    <h4 style="color: red " id="cmpmatch">String Comparison : ? </h4>
+    <br>
+
+    <h2>String comparison using matchAll() method</h2>
+    <button type="submit" onclick="compareUsingMatchAll()">Compare Strings</button>
+    <h4 style="color: red " id="cmpmatchall">String Comparison : ? </h4>
+    <br>
+
+    <h2>String comparison using localeCompare() method</h2>
+    <button type="submit" onclick="compareUsingLocaleCompare()">Compare Strings</button>
+    <h4 style="color: red " id="cmplocal">String Comparison : ? </h4>
+    <br>
+
+
+    <script type="text/javascript">
+        
+        function compareOperators(){
+            var str1 = document.getElementById('str1').value;
+            var str1 = document.getElementById('str1').value;
+            var cmp;
+            if(str1 > str2){ 
+                cmp = "String 1 is greater than String 2";
+            }else if(str1 < str2){
+                cmp = "String 1 is less than String 2";
+            }else if(str1 == str2) {
+                cmp = "String 1 is equal to String 2";
+            }
+            document.getElementById("cmpopr").innerHTML = "String Comparison : " + cmp;
+        }
+
+        function strictEqualityOperator(){
+            var str1 = document.getElementById('str1').value;
+            var str1 = document.getElementById('str1').value;
+            var cmp;
+            if(str1 === str2){ 
+                cmp = "String 1 is equal in value & type with String 2";
+            }else{
+                cmp = "String 1 is not matching in value or type with String 2";
+            }
+            document.getElementById("cmpeqopr").innerHTML = "String Comparison : " + cmp;
+        }
+
+        function compareUsingMatch(){
+            var str1 = document.getElementById('str1').value;
+            var str1 = document.getElementById('str1').value;
+            var cmp;
+            var result = str1.match(str2);
+            if(result == null){ 
+                cmp = "String 1 is not matching with String 2";
+                document.getElementById("cmpmatch").innerHTML = "String Comparison : " + cmp;
+            }else{
+                cmp = "String 1 is matching with String 2";
+                document.getElementById("cmpmatch").innerHTML = "String Comparison : " + cmp + "<br>" + result;
+            }
+            
+            
+        }
+
+        function compareUsingMatchAll(){
+            var str1 = document.getElementById('str1').value;
+            var str1 = document.getElementById('str1').value;
+            var cmp;
+            var result = str1.matchAll(str2);
+            if(result == null){ 
+                cmp = "String 1 is not matching with String 2";
+            }else{
+                cmp = "String 1 is matching with String 2";
+            }
+            document.getElementById("cmpmatchall").innerHTML = "String Comparison : " + cmp + "<br>" + result;
+        }
+
+        function compareUsingLocaleCompare(){
+
+            var str1 = document.getElementById('str1').value;
+            var str1 = document.getElementById('str1').value;
+            var cmp;
+            var result = str1.localeCompare(str2);
+            if(result == 0){ 
+                cmp = "String 1 is equal to String 2";
+            }else if(result == 1){
+                cmp = "String 1 is greater than String 2";
+            }else{
+                cmp = "String 1 is less than String 2";
+            }
+            document.getElementById("cmplocal").innerHTML = "String Comparison : " + cmp;
+            
+        }
+    </script>
+
+</body>
+</html>

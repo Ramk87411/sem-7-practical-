@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>String Operations</title>
+</head>
+<body>
+    <h1>Array Operations</h1>
+    <br>
+    <label for="arr">Enter the array elements separated by spaces : </label>
+    <input type="text" name="arr" id="arr"/>
+    <br><br>
+    <button type="submit" onclick="arrayDisplay()">Display</button>
+    <h4 style="color: red " id="arrDisp">Given array is : ? </h4>
+    <br>
+  
+    <h2>Remove Specific Element from Array</h2>
+    <br>
+    <label for="remarr">Enter the array element to be removed : </label>
+    <input type="text" name="remarr" id="remarr"/>
+    <br><br>
+    <button type="submit" onclick="removeArrayElement()">Remove</button>
+    <h4 style="color: red " id="arrRem">Array after removing element : ? </h4>
+    <br>
+
+    <h2>Check if Element Present in Array</h2>
+    <br>
+    <label for="chkarr">Enter the array element to be removed : </label>
+    <input type="text" name="chkarr" id="chkarr"/>
+    <br><br>
+    <button type="submit" onclick="checkArrayElement()">Check</button>
+    <h4 style="color: red " id="arrChk">Array element present or absent? </h4>
+    <br>
+
+    <h2>Empty Array</h2>
+    <br>
+    <button type="submit" onclick="emptyArray()">Empty</button>
+    <h4 style="color: red " id="arrEmpty">Empty Array ? </h4>
+    <br>
+    
+
+    <script type="text/javascript">
+
+        function arrayDisplay(){
+            var str = document.getElementById('arr').value;
+            var array = str.split(' ');
+            document.getElementById('arrDisp').innerHTML = "Given array is : [" + array + "]";
+        }
+   
+        function removeArrayElement(){
+            var str = document.getElementById('arr').value;
+            var array = str.split(' ');
+            var ele = document.getElementById('remarr').value;
+            if(array.includes(ele)){
+                var index = array.indexOf(ele);
+                array.splice(index,1);
+                document.getElementById('arrRem').innerHTML = "New array is : [" + array + "]";
+            }
+            else{
+                document.getElementById('arrRem').innerHTML = "Given array does not contain this element!";
+            }
+        }
+
+        function checkArrayElement(){
+            var str = document.getElementById('arr').value;
+            var array = str.split(' ');
+            var ele = document.getElementById('chkarr').value;
+            if(array.includes(ele)){
+                var index = array.indexOf(ele);
+                document.getElementById('arrChk').innerHTML = "Element is present at index : " + index;
+            }
+            else{
+                document.getElementById('arrChk').innerHTML = "Given array does not contain this element!";
+            }
+        }
+
+        function emptyArray() {
+            var str = document.getElementById('arr').value;
+            var array = str.split(' ');
+            array.length = 0;                //method 1
+            //array.splice(0, array.length); //method 2
+            document.getElementById('arrEmpty').innerHTML = "Empty Array : [ " + array + "]";
+        }
+    </script>
+
+</body>
+</html>

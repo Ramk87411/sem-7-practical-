@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>String Operations</title>
+</head>
+<body>
+    <h1>String Operations</h1>
+    <br>
+    <label for="str">Enter the string : </label>
+    <input type="text" name="str" id="str"/>
+
+    <h2>String Reversal using FOR Loop</h2>
+    <button type="submit" onclick="revStrUsingFor()">Reverse String</button>
+    <h4 style="color: red " id="revfor">Reverse string is : ? </h4>
+    <br>
+
+    <h2>String Reversal using recursive function</h2>
+    <button type="submit" onclick="var x = revStrRecursive(); document.getElementById('revrec').innerHTML = 'Reverse string is : ' + x;">Reverse String</button>
+    <h4 style="color: red " id="revrec">Reverse string is : ? </h4>
+    <br>
+   
+    <h2>String Reversal using in-built functions</h2>
+    <button type="submit" onclick="revStrInbuiltFunc()">Reverse String</button>
+    <h4 style="color: red " id="revinbuilt">Reverse string is : ? </h4>
+    <br>
+
+    <h2>String Palindrome</h2>
+    <button type="submit" onclick="strPalindrome()">Check String</button>
+    <h4 style="color: red " id="strPalin">Given string is : ? </h4>
+    <br>
+
+    <h2>Replace characters of string</h2>
+    <label for="num">Enter match/characters to be replaced from string : </label>
+    <input type="text" name="match" id="match"/>
+    <br>
+    <br>
+    <label for="num">Enter pattern/characters to be added into string : </label>
+    <input type="text" name="pattern" id="pattern"/>
+    <br>
+    <br>
+    <button type="submit" onclick="strReplace()">Replace</button>
+    <h4 style="color: red " id="strrep">String replacement using replace() method: ? </h4>
+    <h4 style="color: red " id="strrepall">String replacement using replaceall() method: ? </h4>
+
+    <script type="text/javascript">
+        
+        function revStrUsingFor(){
+            var str = document.getElementById('str').value;
+            var revStr = "";
+            for (var i = str.length - 1; i >= 0; i--) { 
+                revStr += str[i];
+            }
+            document.getElementById("revfor").innerHTML = "Reverse string is : " + revStr;
+        }
+
+        function strRevRecursive(str){
+            if(str===''){
+                return null;
+            }else if(str.length == 1){
+                return str;
+            }else{
+                return strRevRecursive(str.substr(1)) + str.charAt(0);
+            }
+            //console.log(str === '' ? '' : strRevRecursive(str.substr(1)) + str.charAt(0));
+            
+        }
+        
+        function revStrRecursive(){
+            var str = document.getElementById('str').value;
+            var revStr = strRevRecursive(str);  
+
+            document.getElementById("revrec").innerHTML = "Reverse string is : " + revStr;
+        }
+
+        function revStrInbuiltFunc(){
+            var str = document.getElementById('str').value;
+            var splitString = str.split(""); 
+            var reverseArray = splitString.reverse();
+            var joinArray = reverseArray.join("");
+            //str.split("").reverse().join(""); //all in single line
+            document.getElementById("revinbuilt").innerHTML = "Reverse string is : " + joinArray;
+        }
+
+        function strReplace(){
+            var str = document.getElementById('str').value;
+            var match = document.getElementById('match').value;
+            var pattern = document.getElementById('pattern').value;
+            var newStr1 = str.replace(match, pattern);
+            var newStr2 = str.replaceAll(match, pattern);
+            document.getElementById("strrep").innerHTML = "String replacement using replace() method: " + newStr1;
+            document.getElementById("strrepall").innerHTML = "String replacement using replace() method: " + newStr2;
+        }
+
+        function strPalindrome(){
+            var str = document.getElementById('str').value;
+            var revStr = str.split("").reverse().join(""); 
+            if(str === revStr)
+                document.getElementById("strPalin").innerHTML = "Given string is Palindrome ";
+            else
+                document.getElementById("strPalin").innerHTML = "Sorry! Given string is not palindrome";
+        }
+
+    </script>
+
+
+     
+</body>
+</html>
