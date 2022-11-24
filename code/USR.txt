@@ -1,0 +1,63 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity usr is
+	Port( clk,rst : in std_logic;
+	      s : in std_logic_vector(3 downto 0); 
+			m : in std_logic_vector(1 downto 0);
+
+			y : out std_logic_vector(3 downto 0) );
+end usr;
+
+
+architecture Behavioral of usr is
+
+signal t : std_logic_vector(3 downto 0);
+begin
+process(clk,rst)
+	 begin
+	 
+	if rst = '1' then
+		y <= "0000";
+	
+  	elsif clk'event and clk = '1' then 	
+	
+	 case(m) is
+	 
+		when "00" =>			-- SISO
+			  t(3) <= s(0);            	-- LSB as input S(0)
+			  t(2) <= t(3);			  
+			  t(1) <= t(2);
+			  t(0) <= t(1);
+		 	  y(0) <= t(0);	 	-- LSB as output Y(0)
+			  				
+				
+		when "01" =>			-- SIPO
+						  
+			  t(3) <= s(0);		-- LSB as input S(0)
+			  t(2) <= t(3);			  
+			  t(1) <= t(2);
+			  t(0) <= t(1);
+			   y <= t ;	 	-- 4 bit output Y
+output  Y(0) <= S(0)		--  LSB
+								
+								
+		when "10" =>			-- PIPO
+		
+			   t <= s;	 		-- 4 bit input S
+			    y <= t;	 	-- 4 bit output Y		  
+		when "11" =>			-- PISO
+		
+			     t <= s;	 	-- 4 bit input S  &  t <= s	
+			  t(2) <= t(3);		--  MSB input as t(3) <= S(3)				
+			  t(1) <= t(2);
+			  t(0) <= t(1);
+			  y(3) <= t(0);	 	 -- MSB as output  Y(3) <= S(3)
+			  			  
+		
+		when others => NULL ;
+		
+		 end case;
+  	 end if;
+ end process;				
+end Behavioral;

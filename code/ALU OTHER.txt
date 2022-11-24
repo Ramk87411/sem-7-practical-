@@ -1,0 +1,27 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+
+entity exp2 is
+    Port ( a,b : in  STD_LOGIC_VECTOR (3 downto 0);
+           sel : in  STD_LOGIC_VECTOR (2 downto 0);
+           cout : out  STD_LOGIC_VECTOR (3 downto 0));
+end exp2;
+
+architecture Behavioral of exp2 is
+
+begin
+with sel select
+cout <= a+b when "000",
+       a-b when "001",
+		 a and b when "010",
+		 a nand b when "011",
+		 a xor b when "100",
+		 a xnor b when "101",
+		 a or b when "110",
+		 a when others;
+
+end Behavioral;

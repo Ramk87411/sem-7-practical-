@@ -1,0 +1,75 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY BE_A4_ALU_Test_bench IS
+END BE_A4_ALU_Test_bench;
+ 
+ARCHITECTURE behavior OF BE_A4_ALU_Test_bench IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+    COMPONENT Be_A4_ALU
+    PORT(
+         A : IN  std_logic_vector(3 downto 0);
+         B : IN  std_logic_vector(3 downto 0);
+         S : IN  std_logic_vector(2 downto 0);
+         Y : OUT  std_logic_vector(4 downto 0)
+        );
+    END COMPONENT;
+    
+
+   --Inputs
+   signal A : std_logic_vector(3 downto 0) := (others => '0');
+   signal B : std_logic_vector(3 downto 0) := (others => '0');
+   signal S : std_logic_vector(2 downto 0) := (others => '0');
+
+ 	--Outputs
+   signal Y : std_logic_vector(4 downto 0);
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
+ 
+BEGIN
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: Be_A4_ALU PORT MAP (
+          A => A,
+          B => B,
+          S => S,
+          Y => Y
+        );
+		  
+   -- Stimulus process
+   stim_proc: process
+   begin		
+      -- hold reset state for 100 ns.
+		A <= "1011";
+		B <= "0111";
+		
+				S <= "000";		--Addition
+				wait for 100 ns;	
+				
+				S <= "001";		--Subtraction
+				wait for 100 ns;
+				
+				S <= "010";		--AND
+				wait for 100 ns;
+				
+				S <= "011";		--NAND
+				wait for 100 ns;
+				
+				S <= "100";		--XOR
+				wait for 100 ns;
+				
+				S <= "101";		--XNOR
+				wait for 100 ns;
+				
+				S <= "110";		--OR
+				wait for 100 ns;
+				
+				S <= "111";		--ALU Pass
+      
+		
+      wait;
+   end process;
+
+END;

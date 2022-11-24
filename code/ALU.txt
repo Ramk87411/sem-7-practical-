@@ -1,0 +1,26 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Be_A4_ALU is
+    Port ( A : in  STD_LOGIC_VECTOR (3 downto 0);
+           B : in  STD_LOGIC_VECTOR (3 downto 0);
+           S : in  STD_LOGIC_VECTOR (2 downto 0);
+           Y : out  STD_LOGIC_VECTOR (4 downto 0));
+end Be_A4_ALU;
+
+architecture Behavioral of Be_A4_ALU is
+
+begin
+	Y <= ('0' & A) + ('0' & B) when S = "000" else
+		  ('0' & A) - ('0' & B) when S = "001" else
+		  
+			'-' & (A AND B) when S = "010" else
+			'-' & (A NAND B) when S = "011" else
+			'-' & (A XOR B) when S = "100" else
+			'-' & (A XNOR B) when S = "101" else
+			'-' & (A OR B) when S = "110" else
+			('-' & A);
+			
+
+end Behavioral;

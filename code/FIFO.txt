@@ -1,0 +1,120 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL; use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+package mem is
+constant width :integer := 4; constant memsize :integer := 8 ;
+type meory is array(0 to (memsize-1))of std_logic_vector ((width-1) downto 0); end package mem;
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL; use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use work.mem.all;
+
+
+
+entity fifo is
+Port ( clk : in STD_LOGIC; rst : in STD_LOGIC;
+rd : in STD_LOGIC; wr : in STD_LOGIC;
+datain : in STD_LOGIC_VECTOR (3 downto 0); memfull : out STD_LOGIC;
+mememp : out STD_LOGIC;
+dataout : out STD_LOGIC_VECTOR (3 downto 0)); end fifo;
+
+architecture Behavioral of fifo is
+signal cdiv : std_logic_vector(25 downto 0); signal	clk : std_logic;
+signal ramtmp : meory;
+signal cntr : std_logic_vector(2 downto 0);
+signal rdptr , wrptr : std_logic_vector(2 downto 0);
+
+begin
+
+
+P1: process(mclk,rst) -- system clk begin
+ 
+if rst = '1' then
+cdiv <= ( others => '0');
+
+elsif mclk'event and mclk = '1' then
+<= cdiv + '1' ;
+
+if ( cdiv = "10111110101111000010000000" ) then
+clk <= '1';
+cdiv <= (others =>'0');
+ 
+
+
+
+end if;
+ 
+else end if;
+ 
+
+clk <= '0';
+ 
+end process;
+
+memoryfull_empty : process(cntr,rdptr,wrptr) -- memoryfull_empty process begin
+if(cntr = "000")and(rdptr = wrptr) then memfull <= '0';
+mememp <= '1';
+elsif(cntr = "111")and(rdptr = wrptr) then memfull <= '1';
+mememp <= '0';
+ 
+else
+
+
+end if; end process;
+ 
+
+memfull <= '0';
+mememp <= '0';
+ 
+
+p2: process (rst, clk, rd, wr) begin
+if rst = '1' then
+cntr <= "000";
+elsif clk'event and clk = '1' then
+if wr = '1' and rd = '0' then cntr <= cntr + '1';
+if cntr <= "111" then
+cntr <= "000";
+end if;
+elsif wr = '0' and rd = '1' then cntr <= cntr - '1';
+if cntr <= "000" then
+cntr <= "111"; else NULL;
+end if;
+
+end if;
+end if; end process;
+
+p3: process(clk,rst,rd,wr,wrptr,rdptr) begin
+if rst = '1' then
+ 
+wrptr <= (others => '0'); rdptr <= (others => '0');
+elsif clk'event and clk = '1' then
+if wr = '1' and rd = '0' then
+wrptr <= wrptr + '1'; rdptr <= rdptr;
+
+elsif wr = '0' and rd = '1' then rdptr <= rdptr + '1'; wrptr <= wrptr;
+else NULL; end if;
+
+end if; end process;
+
+p4: process(clk,rst,rd,wr,cntr) begin
+if clk'event and clk = '1' then if cntr /= "000" then
+if rd = '1' and wr = '0' then
+dataout <= ramtmp(conv_integer(rdptr));
+end if;
+elsif cntr /= "111" then
+if wr = '1' and rd = '0' then
+ramtmp(conv_integer(wrptr)) <= datain;
+ 
+
+
+end if; end process; end Behavioral;
+ 
+
+end if;
+ 
+end if;
+ 
+
